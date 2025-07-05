@@ -7,10 +7,21 @@
             <field name="model">education.student.registration.wizard</field>
             <field name="arch" type="xml">
                 <form string="Student Registration">
-                    <group>
-                        <field name="student_id"/>
-                        <field name="class_id" context="{'default_academic_year_id': context.get('academic_year_id')}"/>
-                    </group>
+                    <sheet>
+                        <group>
+                            <field name="registration_type" widget="radio"/>
+                            <field name="class_id" context="{'default_academic_year_id': context.get('academic_year_id')}"/>
+                        </group>
+                        <group invisible="registration_type == 'new'">
+                            <field name="student_id"/>
+                        </group>
+                        <group string="New Student Details" invisible="registration_type == 'existing'">
+                            <field name="new_student_name"/>
+                            <field name="new_student_date_of_birth"/>
+                            <field name="new_student_gender"/>
+                            <field name="new_student_parent_ids" widget="many2many_tags"/>
+                        </group>
+                    </sheet>
                     <footer>
                         <button name="action_register_student" string="Register" type="object" class="btn-primary"/>
                         <button string="Cancel" class="btn-secondary" special="cancel"/>

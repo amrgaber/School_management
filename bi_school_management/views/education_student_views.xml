@@ -38,6 +38,25 @@
                         <field name="state" widget="statusbar" statusbar_visible="draft,enrolled,graduated,dropped"/>
                     </header>
                     <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="%(bi_school_management.action_education_course_enrollment_wizard)d" type="action" class="oe_stat_button" icon="fa-graduation-cap" context="{'default_student_id': id, 'default_academic_year_id': academic_year_id}">
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_text">New Enrollment</span>
+                                </div>
+                            </button>
+                            <button name="action_view_invoice" type="object" class="oe_stat_button" icon="fa-pencil-square-o" invisible="total_fees == 0">
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_value"><field name="total_fees" widget="monetary" options="{'currency_field': 'currency_id'}"/></span>
+                                    <span class="o_stat_text">Total Fees</span>
+                                </div>
+                            </button>
+                            <button name="action_view_attendance" type="object" class="oe_stat_button" icon="fa-calendar" invisible="attendance_percentage == 0">
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_value"><field name="attendance_percentage" widget="percentage"/></span>
+                                    <span class="o_stat_text">Attendance %</span>
+                                </div>
+                            </button>
+                        </div>
                         <group>
                             <group>
                                 <field name="partner_id" context="{'default_is_student': True}"/>

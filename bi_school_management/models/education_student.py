@@ -274,6 +274,23 @@ class EducationStudent(models.Model):
         })
         return action
 
+    def action_view_invoice(self):
+        """View all invoices related to the student's enrollments"""
+        self.ensure_one()
+        invoice_ids = self.enrollment_ids.mapped('invoice_id').filtered(lambda inv: inv.move_type == 'out_invoice').ids
+        return {
+            'name': _('Student Invoices'),
+            'type': 'ir.actions.act_window',
+            'res_model': 'account.move',
+            'view_mode': 'tree,form',
+            'domain': [('id', 'in', invoice_ids)],
+            'context': {
+                'default_partner_id': self.partner_id.id,
+                'default_move_type': 'out_invoice',
+                'search_default_partner_id': self.partner_id.id,
+            }
+        }
+
     def action_view_attendance(self):
         """View student attendance - Context: Date-based filtering"""
         self.ensure_one()

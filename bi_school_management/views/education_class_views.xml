@@ -24,6 +24,29 @@
             <field name="arch" type="xml">
                 <form string="Class">
                     <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_view_students" type="object" class="oe_stat_button" icon="fa-users">
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_value"><field name="total_students"/></span>
+                                    <span class="o_stat_text">Students</span>
+                                </div>
+                            </button>
+                            <button name="action_mark_attendance" type="object" class="oe_stat_button" icon="fa-calendar-check-o">
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_text">Mark Attendance</span>
+                                </div>
+                            </button>
+                            <button name="action_course_enrollments" type="object" class="oe_stat_button" icon="fa-graduation-cap">
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_text">Course Enrollments</span>
+                                </div>
+                            </button>
+                            <button name="%(bi_school_management.action_education_student)d" type="action" class="oe_stat_button" icon="fa-user-plus" context="{'default_class_id': id, 'default_academic_year_id': academic_year_id}">
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_text">New Student</span>
+                                </div>
+                            </button>
+                        </div>
                         <group>
                             <group>
                                 <field name="name"/>
