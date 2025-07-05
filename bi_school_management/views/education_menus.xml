@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <menuitem id="menu_education_root" name="Education" sequence="10" web_icon="bi_school_management,static/description/icon.png"/>
+
+        <menuitem id="menu_education_configuration" name="Configuration" parent="menu_education_root" sequence="100"/>
+        <menuitem id="menu_education_school" name="Schools" parent="menu_education_configuration" action="action_education_school" sequence="10"/>
+        <menuitem id="menu_education_academic_year" name="Academic Years" parent="menu_education_configuration" action="action_education_academic_year" sequence="20"/>
+        <menuitem id="menu_education_department" name="Departments" parent="menu_education_configuration" action="action_education_department" sequence="30"/>
+
+        <menuitem id="menu_education_students" name="Students" parent="menu_education_root" sequence="20"/>
+        <menuitem id="menu_education_student_all" name="Students" parent="menu_education_students" action="action_education_student" sequence="10"/>
+        <menuitem id="menu_education_student_registration" name="Student Registration" parent="menu_education_students" action="action_education_student_registration" sequence="20"/>
+
+        <menuitem id="menu_education_classes" name="Classes" parent="menu_education_root" sequence="30"/>
+        <menuitem id="menu_education_class_all" name="Classes" parent="menu_education_classes" action="action_education_class" sequence="10"/>
+        <menuitem id="menu_education_attendance" name="Attendance" parent="menu_education_classes" action="action_education_attendance" sequence="20"/>
+
+        <menuitem id="menu_education_courses" name="Courses" parent="menu_education_root" sequence="40"/>
+        <menuitem id="menu_education_course_all" name="Courses" parent="menu_education_courses" action="action_education_course" sequence="10"/>
+        <menuitem id="menu_education_enrollment" name="Course Enrollments" parent="menu_education_courses" action="action_education_enrollment" sequence="20"/>
+
+        <menuitem id="menu_education_reporting" name="Reporting" parent="menu_education_root" sequence="50"/>
+        <menuitem id="menu_education_dashboard" name="Dashboard" parent="menu_education_reporting" action="action_education_dashboard" sequence="10"/>
+        <menuitem id="menu_education_reports" name="Reports" parent="menu_education_reporting" action="action_education_reports" sequence="20"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_attendance_bulk_wizard_form" model="ir.ui.view">
+            <field name="name">education.attendance.bulk.wizard.form</field>
+            <field name="model">education.attendance.bulk.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Bulk Attendance">
+                    <sheet>
+                        <group>
+                            <field name="class_id"/>
+                            <field name="date"/>
+                        </group>
+                        <field name="attendance_line_ids">
+                            <list editable="bottom">
+                                <field name="student_id"/>
+                                <field name="state"/>
+                            </list>
+                        </field>
+                    </sheet>
+                    <footer>
+                        <button string="Mark Attendance" name="action_mark_attendance" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_attendance_bulk_wizard" model="ir.actions.act_window">
+            <field name="name">Bulk Attendance</field>
+            <field name="res_model">education.attendance.bulk.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

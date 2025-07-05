@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_education_attendance_tree" model="ir.ui.view">
+            <field name="name">education.attendance.list</field>
+            <field name="model">education.attendance</field>
+            <field name="arch" type="xml">
+                <list string="Attendance">
+                    <field name="date"/>
+                    <field name="student_id"/>
+                    <field name="class_id"/>
+                    <field name="state"/>
+                    <field name="teacher_id"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_education_attendance_form" model="ir.ui.view">
+            <field name="name">education.attendance.form</field>
+            <field name="model">education.attendance</field>
+            <field name="arch" type="xml">
+                <form string="Attendance">
+                    <sheet>
+                        <group>
+                            <field name="date"/>
+                            <field name="student_id"/>
+                            <field name="class_id"/>
+                            <field name="state"/>
+                            <field name="teacher_id"/>
+                            <field name="notes"/>
+                        </group>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_education_attendance" model="ir.actions.act_window">
+            <field name="name">Attendance</field>
+            <field name="res_model">education.attendance</field>
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new attendance record
+                </p>
+            </field>
+        </record>
+
+    </data>
+</odoo>

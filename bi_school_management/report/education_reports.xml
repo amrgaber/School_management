@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="action_education_dashboard" model="ir.actions.act_window">
+            <field name="name">Dashboard</field>
+            <field name="res_model">education.class</field>
+            <field name="view_mode">list,form</field>
+            <field name="context">{'teacher_mode': True}</field>
+        </record>
+
+        <record id="action_education_reports" model="ir.actions.act_window">
+            <field name="name">Reports</field>
+            <field name="res_model">education.student</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <!-- Student Report -->
+        <record id="action_student_report" model="ir.actions.act_window">
+            <field name="name">Student Report</field>
+            <field name="res_model">education.student</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain">[('state', '=', 'enrolled')]</field>
+            <field name="context">{'search_default_group_by_class': 1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No enrolled students found
+                </p>
+            </field>
+        </record>
+
+        <!-- Course Report -->
+        <record id="action_course_report" model="ir.actions.act_window">
+            <field name="name">Course Report</field>
+            <field name="res_model">education.course</field>
+            <field name="view_mode">list,form</field>
+            <field name="context">{'search_default_group_by_department': 1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No courses found
+                </p>
+            </field>
+        </record>
+
+        <!-- Attendance Report -->
+        <record id="action_attendance_report" model="ir.actions.act_window">
+            <field name="name">Attendance Report</field>
+            <field name="res_model">education.attendance</field>
+            <field name="view_mode">list,form</field>
+            <field name="context">{'search_default_group_by_date': 1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No attendance records found
+                </p>
+            </field>
+        </record>
+
+    </data>
+</odoo>

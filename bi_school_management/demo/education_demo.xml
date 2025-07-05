@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Schools -->
+        <record id="school_demo1" model="education.school">
+            <field name="name">My School</field>
+            <field name="code">MYSCHOOL</field>
+        </record>
+        <record id="school_demo2" model="education.school">
+            <field name="name">City Academy</field>
+            <field name="code">CITYACAD</field>
+        </record>
+
+        <!-- Academic Years -->
+        <record id="academic_year_demo1" model="education.academic.year">
+            <field name="name">2024-2025</field>
+            <field name="start_date">2024-09-01</field>
+            <field name="end_date">2025-06-30</field>
+            <field name="school_id" ref="school_demo1"/>
+        </record>
+        <record id="academic_year_demo2" model="education.academic.year">
+            <field name="name">2023-2024</field>
+            <field name="start_date">2023-09-01</field>
+            <field name="end_date">2024-06-30</field>
+            <field name="school_id" ref="school_demo2"/>
+        </record>
+
+        <!-- Departments -->
+        <record id="department_demo1" model="education.department">
+            <field name="name">Computer Science</field>
+            <field name="code">CS</field>
+            <field name="school_id" ref="school_demo1"/>
+        </record>
+        <record id="department_demo2" model="education.department">
+            <field name="name">Mathematics</field>
+            <field name="code">MATH</field>
+            <field name="school_id" ref="school_demo2"/>
+        </record>
+
+        <!-- Classes -->
+        <record id="class_demo1" model="education.class">
+            <field name="name">Grade 10</field>
+            <field name="code">G10</field>
+            <field name="department_id" ref="department_demo1"/>
+            <field name="academic_year_id" ref="academic_year_demo1"/>
+        </record>
+        <record id="class_demo2" model="education.class">
+            <field name="name">Grade 11</field>
+            <field name="code">G11</field>
+            <field name="department_id" ref="department_demo2"/>
+            <field name="academic_year_id" ref="academic_year_demo2"/>
+        </record>
+
+        <!-- Courses -->
+        <record id="course_demo1" model="education.course">
+            <field name="name">Introduction to Programming</field>
+            <field name="code">CS101</field>
+            <field name="department_id" ref="department_demo1"/>
+        </record>
+        <record id="course_demo2" model="education.course">
+            <field name="name">Algebra I</field>
+            <field name="code">MATH101</field>
+            <field name="department_id" ref="department_demo2"/>
+        </record>
+
+        <!-- Students (using Odoo demo partners) -->
+        <record id="student_demo1" model="education.student">
+            <field name="partner_id" ref="base.partner_demo"/>
+            <field name="student_id">S0001</field>
+            <field name="class_id" ref="class_demo1"/>
+        </record>
+        <record id="student_demo2" model="education.student">
+            <field name="partner_id" ref="base.res_partner_2"/>
+            <field name="student_id">S0002</field>
+            <field name="class_id" ref="class_demo1"/>
+        </record>
+        <record id="student_demo3" model="education.student">
+            <field name="partner_id" ref="base.res_partner_3"/>
+            <field name="student_id">S0003</field>
+            <field name="class_id" ref="class_demo2"/>
+        </record>
+
+        <!-- Enrollments -->
+        <record id="enrollment_demo1" model="education.enrollment">
+            <field name="student_id" ref="student_demo1"/>
+            <field name="course_id" ref="course_demo1"/>
+            <field name="enrollment_date">2024-09-10</field>
+            <field name="state">enrolled</field>
+        </record>
+        <record id="enrollment_demo2" model="education.enrollment">
+            <field name="student_id" ref="student_demo2"/>
+            <field name="course_id" ref="course_demo1"/>
+            <field name="enrollment_date">2024-09-12</field>
+            <field name="state">enrolled</field>
+        </record>
+        <record id="enrollment_demo3" model="education.enrollment">
+            <field name="student_id" ref="student_demo3"/>
+            <field name="course_id" ref="course_demo2"/>
+            <field name="enrollment_date">2023-09-15</field>
+            <field name="state">enrolled</field>
+        </record>
+
+        <!-- Attendance Records -->
+        <record id="attendance_demo1" model="education.attendance">
+            <field name="student_id" ref="student_demo1"/>
+            <field name="class_id" ref="class_demo1"/>
+            <field name="date">2024-09-15</field>
+            <field name="state">present</field>
+        </record>
+        <record id="attendance_demo2" model="education.attendance">
+            <field name="student_id" ref="student_demo2"/>
+            <field name="class_id" ref="class_demo1"/>
+            <field name="date">2024-09-15</field>
+            <field name="state">absent</field>
+        </record>
+        <record id="attendance_demo3" model="education.attendance">
+            <field name="student_id" ref="student_demo3"/>
+            <field name="class_id" ref="class_demo2"/>
+            <field name="date">2023-09-20</field>
+            <field name="state">present</field>
+        </record>
+
+    </data>
+</odoo>

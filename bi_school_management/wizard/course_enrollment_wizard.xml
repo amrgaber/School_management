@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_education_course_enrollment_wizard_form" model="ir.ui.view">
+            <field name="name">education.course.enrollment.wizard.form</field>
+            <field name="model">education.course.enrollment.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Course Enrollment">
+                    <group>
+                        <field name="student_id"/>
+                        <field name="course_id" domain="[ ('department_id', '=', context.get('department_id'))]"/>
+                    </group>
+                    <footer>
+                        <button name="action_enroll_student" string="Enroll" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_education_course_enrollment_wizard" model="ir.actions.act_window">
+            <field name="name">Course Enrollment</field>
+            <field name="res_model">education.course.enrollment.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>
