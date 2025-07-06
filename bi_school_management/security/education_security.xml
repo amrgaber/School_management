@@ -26,24 +26,10 @@
             <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
         </record>
 
-        <record id="education_class_teacher_rule" model="ir.rule">
-            <field name="name">Teacher Class Rule</field>
-            <field name="model_id" ref="model_education_class"/>
-            <field name="groups" eval="[(4, ref('group_education_teacher'))]"/>
-            <field name="domain_force">[('teacher_id', '=', user.employee_id.id)]</field>
-        </record>
-
         <record id="education_school_company_rule" model="ir.rule">
             <field name="name">School Company Rule</field>
             <field name="model_id" ref="model_education_school"/>
             <field name="domain_force">[('company_id', 'in', company_ids)]</field>
-        </record>
-
-        <record id="education_student_user_rule" model="ir.rule">
-            <field name="name">Student User Rule</field>
-            <field name="model_id" ref="model_education_student"/>
-            <field name="groups" eval="[(4, ref('group_education_user'))]"/>
-            <field name="domain_force">[('partner_id.user_ids', 'in', [user.id])]</field>
         </record>
 
     </data>

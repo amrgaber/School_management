@@ -2,7 +2,7 @@
 <odoo>
     <data>
 
-        <menuitem id="menu_education_root" name="Education" sequence="10" web_icon="bi_school_management,static/description/icon.png"/>
+        <menuitem id="menu_education_root" name="School Management" sequence="10" web_icon="bi_school_management,static/description/icon.png"/>
 
         <menuitem id="menu_education_configuration" name="Configuration" parent="menu_education_root" sequence="100"/>
         <menuitem id="menu_education_school" name="Schools" parent="menu_education_configuration" action="action_education_school" sequence="10"/>
