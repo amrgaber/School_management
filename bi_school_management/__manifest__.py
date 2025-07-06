@@ -56,6 +56,7 @@ This module serves as a practical tutorial and reference for developers learning
         'views/education_student_views.xml',
         'views/education_enrollment_views.xml',
         'views/education_attendance_views.xml',
+        'views/res_partner_views.xml',
 
         # Wizards
         'wizard/attendance_bulk_wizard.xml',

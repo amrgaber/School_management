@@ -52,7 +52,8 @@ class EducationStudent(models.Model):
         ('male', 'Male'),
         ('female', 'Female'),
         ('other', 'Other')
-    ], string='Gender')
+    ], string='Gender', related='partner_id.gender', store=True)
+    parent_enrollment_note = fields.Char(string='Enrollment Note', help="Note to be passed to new enrollments")
 
     # Academic Information
     academic_year_id = fields.Many2one('education.academic.year', string='Academic Year',

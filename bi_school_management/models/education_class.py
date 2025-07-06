@@ -30,6 +30,11 @@ class EducationClass(models.Model):
     description = fields.Text(string='Description')
     active = fields.Boolean(string='Active', default=True)
 
+    gender = fields.Selection([
+        ('male', 'Male'),
+        ('female', 'Female'),
+    ], string='Gender', help="Filter students by this gender. Not required.")
+
     @api.depends('student_ids', 'capacity')
     def _compute_totals(self):
         for class_rec in self:

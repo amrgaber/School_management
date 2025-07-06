@@ -59,13 +59,14 @@
                                 <field name="capacity"/>
                                 <field name="total_students"/>
                                 <field name="available_capacity"/>
+                                <field name="gender"/>
                             </group>
                         </group>
                         <notebook>
                             <page string="Students">
                                 <field name="student_ids">
-                                    <list>
-                                        <field name="partner_id"/>
+                                    <list  editable="bottom">
+                                        <field name="partner_id" domain="[('gender','=',parent.gender)]" context="{'default_gender': parent.gender}"/>
                                         <field name="student_id"/>
                                         <field name="enrollment_date"/>
                                         <field name="state"/>
