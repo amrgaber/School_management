@@ -75,7 +75,7 @@
                         </group>
                         <notebook>
                             <page string="Academic Information">
-                                <field name="enrollment_ids">
+                                <field name="enrollment_ids" context="{'default_enrollment_date': enrollment_date}">
                                     <list editable="bottom">
                                         <field name="course_id"/>
                                         <field name="enrollment_date"/>
