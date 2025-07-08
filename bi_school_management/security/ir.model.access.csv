@@ -26,3 +26,5 @@ access_education_attendance_bulk_wizard_user,education.attendance.bulk.wizard.us
 access_education_attendance_bulk_wizard_admin,education.attendance.bulk.wizard.admin,model_education_attendance_bulk_wizard,base.group_system,1,1,1,1
 access_education_student_registration_wizard_user,education.student.registration.wizard.user,model_education_student_registration_wizard,base.group_user,1,1,1,0
 access_education_student_registration_wizard_admin,education.student.registration.wizard.admin,model_education_student_registration_wizard,base.group_system,1,1,1,1
+access_education_student_batch_create_wizard_user,education.student.batch.create.wizard.user,model_education_student_batch_create_wizard,base.group_user,1,1,1,0
+access_education_student_batch_create_line_user,education.student.batch.create.line.user,model_education_student_batch_create_line,base.group_user,1,1,1,0
