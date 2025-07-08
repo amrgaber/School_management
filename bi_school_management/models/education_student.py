@@ -378,3 +378,25 @@ class EducationStudent(models.Model):
                 raise ValidationError(_('Student age cannot be less than 3 years.'))
             if student.age and student.age > 100:
                 raise ValidationError(_('Student age cannot be more than 100 years.'))
+
+    @api.depends_context('add_to_class')
+    def _compute_add_to_class(self):
+        """Compute if the 'Add to Class' button should be shown."""
+        for record in self:
+            record.add_to_class = bool(self.env.context.get('add_to_class'))
+
+    add_to_class = fields.Boolean(
+        string='Add to Class',
+        compute='_compute_add_to_class',
+        help='Show the "Add to Class" button when selecting students for a class.'
+    )
+  
+    def action_add_to_class(self):
+        """Add this student to the active class."""
+        class_id = self.env.context.get('active_class_id')
+        if class_id:
+            school_class = self.env['education.class'].browse(class_id)
+            school_class.student_ids = [(4, self.id)]  # Add this student
+        # Optionally, return to the class or show a message
+        return True
+        

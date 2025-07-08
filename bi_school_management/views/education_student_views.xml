@@ -24,7 +24,9 @@
                     />
                     <field name="attendance_percentage" sum="Attendance %"/>
                     <field name="company_id" optional="show" column_invisible="True"/>
-                </list>
+                    <button name="action_add_to_class" type="object" icon="fa-plus"
+                            invisible="add_to_class == False"/>
+                    </list>
             </field>
         </record>
 
