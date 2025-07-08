@@ -85,7 +85,24 @@ class EducationStudent(models.Model):
          'Attendance percentage must be between 0 and 100!'),
     ]
 
-    # Computed Methods
+    is_class_teacher = fields.Boolean(
+        string="Is Current User Class Teacher",
+        compute="_compute_is_class_teacher",
+        help="True if the current user is the class teacher for this student."
+    )
+    
+    @api.depends_context('uid')
+    def _compute_is_class_teacher(self):
+        """Compute if the current user is the class teacher for this student."""
+        for student in self:
+            # Suppose you have a many2one to class: class_id
+            class_teacher = student.class_id.teacher_id
+            student.is_class_teacher = class_teacher and class_teacher.user_id.id == self.env.context.get('uid')
+
+    def some_teacher_action(self):
+        pass
+
+                # Computed Methods
     @api.depends('enrollment_ids', 'enrollment_ids.state')
     def _compute_enrollments(self):
         for student in self:

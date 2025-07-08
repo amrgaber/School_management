@@ -39,7 +39,10 @@
                         <button name="action_enroll" string="Enroll" type="object" class="oe_highlight" invisible="state != 'draft'"/>
                         <button name="action_graduate" string="Graduate" type="object" class="oe_highlight" invisible="state != 'enrolled'"/>
                         <button name="action_dropout" string="Dropout" type="object" invisible="state != 'enrolled'"/>
-                        <field name="state" widget="statusbar" statusbar_visible="draft,enrolled,graduated,dropped"/>
+                        <button name="some_teacher_action" type="object"
+                                string="Special Teacher Action"
+                                invisible="not is_class_teacher"/>
+                                <field name="state" widget="statusbar" statusbar_visible="draft,enrolled,graduated,dropped"/>
                     </header>
                     <sheet>
                         <div class="oe_button_box" name="button_box">
