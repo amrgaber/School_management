@@ -11,6 +11,7 @@
 
         <menuitem id="menu_education_students" name="Students" parent="menu_education_root" sequence="20"/>
         <menuitem id="menu_education_student_all" name="Students" parent="menu_education_students" action="action_education_student" sequence="10"/>
+        <menuitem id="menu_education_student_all_2" name="Students without attendance" parent="menu_education_students" action="action_education_student_without_attendance" sequence="10"/>
         <menuitem id="menu_education_student_registration" name="Student Registration" parent="menu_education_students" action="action_education_student_registration" sequence="20"/>
 
         <menuitem id="menu_education_classes" name="Classes" parent="menu_education_root" sequence="30"/>

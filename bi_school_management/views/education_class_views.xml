@@ -8,7 +8,7 @@
             <field name="arch" type="xml">
                 <list string="Classes" sample="1">
                     <field name="name"/>
-                    <field name="code"/>
+                    <field name="code" />
                     <field name="department_id"/>
                     <field name="academic_year_id"/>
                     <field name="teacher_id"/>
@@ -25,7 +25,9 @@
                 <form string="Class">
                     <sheet>
                         <div class="oe_button_box" name="button_box">
-                            <button name="action_view_students" type="object" class="oe_stat_button" icon="fa-users">
+                            <button name="action_view_students" type="object" class="oe_stat_button" icon="fa-users"
+                            context="{'search_default_state':'enrolled','form_view_ref':'bi_school_management.view_education_student_form'}"
+                            >
                                 <div class="o_field_widget o_stat_info">
                                     <span class="o_stat_value"><field name="total_students"/></span>
                                     <span class="o_stat_text">Students</span>
@@ -66,10 +68,14 @@
                             <page string="Students">
                                 <field name="student_ids">
                                     <list  editable="bottom">
-                                        <field name="partner_id" domain="[('gender','=',parent.gender)]" context="{'default_gender': parent.gender}"/>
+                                        <field name="partner_id"
+                                               domain="[('gender','=',parent.gender)]"
+                                               context="{'default_gender':parent.gender}"
+                                        />
                                         <field name="student_id"/>
                                         <field name="enrollment_date"/>
-                                        <field name="state"/>
+                                        <field name="state"
+                                               column_invisible="not parent.teacher_id"/>
                                     </list>
                                 </field>
                             </page>

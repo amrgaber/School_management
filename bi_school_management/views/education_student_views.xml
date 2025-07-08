@@ -19,7 +19,9 @@
                            decoration-info="state == 'draft'"
                            decoration-success="state == 'enrolled'"
                            decoration-warning="state == 'graduated'"
-                           decoration-muted="state == 'dropped'"/>
+                           decoration-muted="state == 'dropped'"
+                           column_invisible="context.get('hide_page_attendance')"
+                    />
                     <field name="attendance_percentage" sum="Attendance %"/>
                     <field name="company_id" optional="show" column_invisible="True"/>
                 </list>
@@ -63,7 +65,7 @@
                                 <field name="student_id"/>
                                 <field name="date_of_birth"/>
                                 <field name="age"/>
-                                <field name="gender"/>
+                                <field name="gender" readonly="context.get('hide_page_attendance')"/>
                             </group>
                             <group>
                                 <field name="class_id"/>
@@ -83,8 +85,8 @@
                                     </list>
                                 </field>
                             </page>
-                            <page string="Attendance">
-                                <field name="attendance_ids">
+                            <page string="Attendance" invisible="context.get('hide_page_attendance')">
+                                <field name="attendance_ids" invisible="context.get('hide_page_attendance')">
                                     <list>
                                         <field name="date"/>
                                         <field name="state"/>
@@ -145,7 +147,9 @@
                     <field name="class_id"/>
                     <field name="state"/>
                     <filter string="Enrolled" name="enrolled_students" domain="[('state', '=', 'enrolled')]"/>
-                    <filter string="Draft" name="draft_students" domain="[('state', '=', 'draft')]"/>
+                    <filter string="Draft" name="draft_students" domain="[('state', '=', 'draft')]"
+                            invisible="context.get('hide_draft_mode')"
+                    />
                     <filter string="Graduated" name="graduated_students" domain="[('state', '=', 'graduated')]"/>
                     <filter string="Dropped Out" name="dropped_students" domain="[('state', '=', 'dropped')]"/>
                 </search>
@@ -157,6 +161,19 @@
             <field name="res_model">education.student</field>
             <field name="view_mode">kanban,list,form</field>
             <field name="search_view_id" ref="view_education_student_search"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new student
+                </p>
+            </field>
+        </record>
+
+        <record id="action_education_student_without_attendance" model="ir.actions.act_window">
+            <field name="name">Students without Attendance</field>
+            <field name="res_model">education.student</field>
+            <field name="view_mode">kanban,list,form</field>
+            <field name="search_view_id" ref="view_education_student_search"/>
+            <field name="context">{'hide_page_attendance':True,'hide_draft_mode':True}</field>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
                     Create a new student
