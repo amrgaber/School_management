@@ -353,24 +353,30 @@ class EducationStudent(models.Model):
         }
 
     # Override Methods
-    @api.model
-    def create(self, vals):
-        """Override create to demonstrate context usage in creation"""
-        # Auto-generate student ID if not provided
-        if not vals.get('student_id'):
-            vals['student_id'] = self._generate_student_id(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        """Support both single and batch creation, with context logic."""
+        for vals in vals_list:
+            # Auto-generate student ID if not provided
+            if not vals.get('student_id'):
+                vals['student_id'] = self._generate_student_id(vals)
 
-        # Set default class based on context
-        if not vals.get('class_id') and self.env.context.get('default_class_id'):
-            vals['class_id'] = self.env.context.get('default_class_id')
+            # Set default class based on context
+            if not vals.get('class_id') and self.env.context.get('default_class_id'):
+                vals['class_id'] = self.env.context.get('default_class_id')
 
-        student = super(EducationStudent, self).create(vals)
+            # Ensure partner is created if not provided (from previous step)
+            if not vals.get('partner_id'):
+                partner = self.env['res.partner'].create({'name': vals.get('name', 'Student')})
+                vals['partner_id'] = partner.id
 
-        # Auto-enroll if context flag is set
+        students = super().create(vals_list)
+
+        # Auto-enroll if context flag is set (for each student)
         if self.env.context.get('auto_enroll'):
-            student.action_enroll()
+            students.action_enroll()
 
-        return student
+        return students
 
     def _generate_student_id(self, vals):
         """Generate unique student ID"""
