@@ -96,6 +96,10 @@ class EducationStudent(models.Model):
         """Compute if the current user is the class teacher for this student."""
         for student in self:
             # Suppose you have a many2one to class: class_id
+            # Example: print context for debugging/learning
+            print("context",self.env.context)
+            print("lang",self.env.context.get('lang'))
+            print("tz",self.env.context.get('tz'))
             class_teacher = student.class_id.teacher_id
             student.is_class_teacher = class_teacher and class_teacher.user_id.id == self.env.context.get('uid')
 
