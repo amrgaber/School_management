@@ -24,7 +24,13 @@
             <field name="arch" type="xml">
                 <form string="Class">
                     <sheet>
-                        <div class="oe_button_box" name="button_box">
+                        <header>
+                            <button name="action_add_student"
+                                    type="object"
+                                    string="Add Students"
+                                    class="oe_highlight"
+                                    icon="fa-plus"/>
+                        </header>                        <div class="oe_button_box" name="button_box">
                             <button name="action_view_students" type="object" class="oe_stat_button" icon="fa-users"
                             context="{'search_default_state':'enrolled','form_view_ref':'bi_school_management.view_education_student_form'}"
                             >

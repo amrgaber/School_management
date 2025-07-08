@@ -78,12 +78,30 @@ class EducationStudent(models.Model):
         ('fail', 'Fail')
     ], string='Graduation Grade')
 
+    is_class_teacher = fields.Boolean(
+        string="Is Current User Class Teacher",
+        compute="_compute_is_class_teacher",
+        help="True if the current user is the class teacher for this student."
+    )
     # SQL Constraints
     _sql_constraints = [
         ('student_id_unique', 'unique(student_id, company_id)', 'Student ID must be unique per company!'),
         ('positive_attendance', 'check(attendance_percentage >= 0 AND attendance_percentage <= 100)',
          'Attendance percentage must be between 0 and 100!'),
     ]
+
+    @api.depends_context('uid')
+    def _compute_is_class_teacher(self):
+        """Compute if the current user is the class teacher for this student."""
+        for student in self:
+            print("context",self.env.context)
+
+            # Suppose you have a many2one to class: class_id
+            class_teacher = student.class_id.teacher_id
+            student.is_class_teacher = class_teacher and class_teacher.user_id.id == self.env.context.get('uid')
+
+    def some_teacher_action(self):
+        pass
 
     # Computed Methods
     @api.depends('enrollment_ids', 'enrollment_ids.state')
@@ -378,3 +396,25 @@ class EducationStudent(models.Model):
                 raise ValidationError(_('Student age cannot be less than 3 years.'))
             if student.age and student.age > 100:
                 raise ValidationError(_('Student age cannot be more than 100 years.'))
+
+    add_to_class = fields.Boolean(
+        string='Add to Class',
+        compute='_compute_add_to_class',
+        help='Show the "Add to Class" button when selecting students for a class.'
+    )
+
+    @api.depends_context('add_to_class')
+    def _compute_add_to_class(self):
+        """Compute if the 'Add to Class' button should be shown."""
+        for record in self:
+            record.add_to_class = bool(self.env.context.get('add_to_class'))
+
+
+    def action_add_to_class(self):
+        """Add this student to the active class."""
+        class_id = self.env.context.get('active_class_id')
+        if class_id:
+            school_class = self.env['education.class'].browse(class_id)
+            school_class.student_ids = [(4, self.id)]  # Add this student
+        # Optionally, return to the class or show a message
+        return True
