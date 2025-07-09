@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
 
         <record id="view_education_student_registration_wizard_form" model="ir.ui.view">
             <field name="name">education.student.registration.wizard.form</field>
@@ -37,5 +36,4 @@
             <field name="target">new</field>
         </record>
 
-    </data>
 </odoo>

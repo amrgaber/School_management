@@ -45,6 +45,7 @@ This module serves as a practical tutorial and reference for developers learning
         "security/ir.model.access.csv",
         # Data
         "data/education_sequence.xml",
+        "data/education_data.xml",
         # Views
         "views/education_school_views.xml",
         "views/education_academic_year_views.xml",

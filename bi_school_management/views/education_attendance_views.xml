@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
 
         <record id="view_education_attendance_tree" model="ir.ui.view">
             <field name="name">education.attendance.list</field>
@@ -47,5 +46,4 @@
             </field>
         </record>
 
-    </data>
 </odoo>

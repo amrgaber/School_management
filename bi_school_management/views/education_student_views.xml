@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
 
         <record id="view_education_student_tree" model="ir.ui.view">
             <field name="name">education.student.list</field>
@@ -193,5 +192,4 @@
             <field name="context">{'default_enrollment_date': context_today()}</field>
         </record>
 
-    </data>
 </odoo>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
 
         <menuitem id="menu_education_root" name="School Management" sequence="10" web_icon="bi_school_management,static/description/icon.png"/>
 
@@ -26,5 +25,4 @@
         <menuitem id="menu_education_dashboard" name="Dashboard" parent="menu_education_reporting" action="action_education_dashboard" sequence="10"/>
         <menuitem id="menu_education_reports" name="Reports" parent="menu_education_reporting" action="action_education_reports" sequence="20"/>
 
-    </data>
 </odoo>

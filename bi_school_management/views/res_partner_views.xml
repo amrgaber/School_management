@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
         <!-- Inherit the base res.partner form view to add the gender field -->
         <record id="res_partner_view_form_inherit_school_management" model="ir.ui.view">
             <field name="name">res.partner.form.inherit.school.management</field>
@@ -13,5 +12,4 @@
                 </field>
             </field>
         </record>
-    </data>
 </odoo>

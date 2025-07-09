@@ -15,7 +15,7 @@ class EducationAcademicYear(models.Model):
     school_id = fields.Many2one(
         "education.school", string="School", required=True, tracking=True
     )
-
+    academic_year_id = fields.Char("Hell")
     # Date Information
     start_date = fields.Date(string="Start Date", required=True, tracking=True)
     end_date = fields.Date(string="End Date", required=True, tracking=True)
