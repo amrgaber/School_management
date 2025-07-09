@@ -7,3 +7,23 @@ __pycache__/
 docs/
 # Tutorial
 tutorial/
+
+# Development Configuration Files (keep local)
+.pre-commit-config.yaml
+.pylintrc
+.flake8
+.yamllint.yml
+.secrets.baseline
+pyproject.toml
+.mypy.ini
+.bandit
+
+# IDE specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS specific files
+.DS_Store
+Thumbs.db
