@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from . import (
     attendance_bulk_wizard,
     bulk_attendance_wizard,

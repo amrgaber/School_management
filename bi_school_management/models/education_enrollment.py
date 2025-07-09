@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 
@@ -477,7 +475,7 @@ class EducationEnrollment(models.Model):
         if not vals.get("course_id") and self.env.context.get("default_course_id"):
             vals["course_id"] = self.env.context.get("default_course_id")
 
-        enrollment = super(EducationEnrollment, self).create(vals)
+        enrollment = super().create(vals)
 
         # Auto-confirm if context flag is set
         if self.env.context.get("auto_confirm"):

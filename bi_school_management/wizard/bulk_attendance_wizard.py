@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from datetime import datetime, timedelta
 
 from odoo import _, api, fields, models
@@ -400,7 +398,7 @@ class BulkAttendanceWizard(models.TransientModel):
     @api.model
     def default_get(self, fields_list):
         """Override default_get to demonstrate context usage in wizard initialization"""
-        res = super(BulkAttendanceWizard, self).default_get(fields_list)
+        res = super().default_get(fields_list)
 
         # Set defaults based on context
         if self.env.context.get("default_class_id"):

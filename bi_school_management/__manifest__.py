@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 {
     "name": "Education Context Demo",
     "version": "18.0.1.0.0",

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from odoo import http
 
 # class EducationContextDemo(http.Controller):

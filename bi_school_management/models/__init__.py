@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from . import (
     education_academic_year,
     education_attendance,
