@@ -355,28 +355,7 @@ class EducationStudent(models.Model):
     # Override Methods
     @api.model_create_multi
     def create(self, vals_list):
-        """Support both single and batch creation, with context logic."""
-        for vals in vals_list:
-            # Auto-generate student ID if not provided
-            if not vals.get('student_id'):
-                vals['student_id'] = self._generate_student_id(vals)
-
-            # Set default class based on context
-            if not vals.get('class_id') and self.env.context.get('default_class_id'):
-                vals['class_id'] = self.env.context.get('default_class_id')
-
-            # Ensure partner is created if not provided (from previous step)
-            if not vals.get('partner_id'):
-                partner = self.env['res.partner'].create({'name': vals.get('name', 'Student')})
-                vals['partner_id'] = partner.id
-
-        students = super().create(vals_list)
-
-        # Auto-enroll if context flag is set (for each student)
-        if self.env.context.get('auto_enroll'):
-            students.action_enroll()
-
-        return students
+        return super().create(vals_list)
 
     def _generate_student_id(self, vals):
         """Generate unique student ID"""
@@ -426,3 +405,15 @@ class EducationStudent(models.Model):
             school_class.student_ids = [(4, self.id)]  # Add this student
         # Optionally, return to the class or show a message
         return True
+
+    @api.model
+    def create_student_with_defaults(self, name, class_id=None):
+        """Create a new student with default values, including a partner."""
+        partner = self.env['res.partner'].create({'name': name})
+        vals = {
+            'name': name,
+            'class_id': class_id,
+            'partner_id': partner.id,
+            # Add other default fields as needed
+        }
+        return self.create(vals)

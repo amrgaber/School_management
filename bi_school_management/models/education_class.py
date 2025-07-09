@@ -85,3 +85,19 @@ class EducationClass(models.Model):
             'target': 'current',
             'context': {'add_to_class': True, 'active_class_id': self.id},
         }
+
+    def action_create_test_student(self):
+        """Create a test student for this class using the @api.model method from the student model."""
+        self.ensure_one()
+        student_model = self.env['education.student']
+        # Example: create a student named 'Test Student' in this class
+        new_student = student_model.create_student_with_defaults('Test Student', class_id=self.id)
+        # Optionally, return an action to open the new student record
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Test Student',
+            'res_model': 'education.student',
+            'view_mode': 'form',
+            'res_id': new_student.id,
+            'target': 'current',
+        }
