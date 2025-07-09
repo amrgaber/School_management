@@ -1,0 +1,83 @@
+repos:
+  - repo: /Users/amrgaber/OdooProjects/Odoo18Tutorial/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+
+  - repo: /Users/amrgaber/OdooProjects/Odoo18Tutorial/black
+    rev: 23.3.0
+    hooks:
+      - id: black
+
+  - repo: /Users/amrgaber/OdooProjects/Odoo18Tutorial/isort
+    rev: 5.12.0
+    hooks:
+      - id: isort
+        args: ["--profile", "black"]
+
+  # Security scanning
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.10
+    hooks:
+      - id: bandit
+        args: ["-x", "tests", "-s", "B105,B311"]
+        exclude: ^tests/
+
+  # Python modernization
+  - repo: /Users/amrgaber/OdooProjects/Odoo18Tutorial/pyupgrade
+    rev: v3.18.0
+    hooks:
+      - id: pyupgrade
+        args: [--py3-only, --py38-plus]
+
+  # Odoo-specific hooks
+  - repo: /Users/amrgaber/OdooProjects/Odoo18Tutorial/odoo-pre-commit-hooks
+    rev: v0.1.4
+    hooks:
+      - id: oca-checks-odoo-module
+        args: [
+            "--disable=xml-deprecated-data-node",
+            "--manifest-required-author=Amr Gaber", # You can list multiple accepted authors
+          ]
+      - id: oca-checks-po
+        args: ["--fix"]
+
+  - repo: /Users/amrgaber/OdooProjects/Odoo18Tutorial/maintainer-tools
+    rev: f9b919b9868143135a9c9cb03021089cabba8223 # Replace with the latest commit hash or a tag
+    hooks:
+      # Disabled due to formatting conflict with trailing-whitespace
+      # - id: oca-gen-addon-readme
+      #   args:
+      #     - --repo-name=School_management
+      #     - --addons-dir=/Users/amrgaber/OdooProjects/Odoo18Tutorial/Tutorial/SchoolManagement
+      #     - --branch=18.0
+      - id: oca-gen-addons-table
+      - id: oca-gen-addon-icon
+        args:
+          - --addons-dir=/Users/amrgaber/OdooProjects/Odoo18Tutorial/Tutorial/SchoolManagement
+      - id: oca-update-pre-commit-excluded-addons
+      - id: oca-fix-manifest-website
+        args:
+          - https://www.linkedin.com/in/amrgabr/
+      # - id: oca-gen-external-dependencies
+      #   args:
+      #     - --addons-dir=/Users/amrgaber/OdooProjects/Odoo18Tutorial/Tutorial/SchoolManagement
+
+  # Pylint with Odoo plugin (clickable output)
+  #  - repo: local
+  #    hooks:
+  #      - id: pylint_odoo_clickable
+  #        name: Pylint Odoo (Clickable)
+  #        entry: /Users/amrgaber/OdooProjects/Odoo18Tutorial/Tutorial/SchoolManagement/scripts/pylint-clickable.sh
+  #        language: system
+  #        files: \.py$
+
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v2.4.1
+    hooks:
+      - id: prettier
+        # https://github.com/prettier/prettier/issues/12143
+        exclude: "}$"
