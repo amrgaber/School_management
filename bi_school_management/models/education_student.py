@@ -78,11 +78,6 @@ class EducationStudent(models.Model):
         ('fail', 'Fail')
     ], string='Graduation Grade')
 
-    is_class_teacher = fields.Boolean(
-        string="Is Current User Class Teacher",
-        compute="_compute_is_class_teacher",
-        help="True if the current user is the class teacher for this student."
-    )
     # SQL Constraints
     _sql_constraints = [
         ('student_id_unique', 'unique(student_id, company_id)', 'Student ID must be unique per company!'),
@@ -90,20 +85,28 @@ class EducationStudent(models.Model):
          'Attendance percentage must be between 0 and 100!'),
     ]
 
+    is_class_teacher = fields.Boolean(
+        string="Is Current User Class Teacher",
+        compute="_compute_is_class_teacher",
+        help="True if the current user is the class teacher for this student."
+    )
+
     @api.depends_context('uid')
     def _compute_is_class_teacher(self):
         """Compute if the current user is the class teacher for this student."""
         for student in self:
-            print("context",self.env.context)
-
             # Suppose you have a many2one to class: class_id
+            # Example: print context for debugging/learning
+            print("context",self.env.context)
+            print("lang",self.env.context.get('lang'))
+            print("tz",self.env.context.get('tz'))
             class_teacher = student.class_id.teacher_id
             student.is_class_teacher = class_teacher and class_teacher.user_id.id == self.env.context.get('uid')
 
     def some_teacher_action(self):
         pass
 
-    # Computed Methods
+                # Computed Methods
     @api.depends('enrollment_ids', 'enrollment_ids.state')
     def _compute_enrollments(self):
         for student in self:
@@ -397,18 +400,17 @@ class EducationStudent(models.Model):
             if student.age and student.age > 100:
                 raise ValidationError(_('Student age cannot be more than 100 years.'))
 
-    add_to_class = fields.Boolean(
-        string='Add to Class',
-        compute='_compute_add_to_class',
-        help='Show the "Add to Class" button when selecting students for a class.'
-    )
-
     @api.depends_context('add_to_class')
     def _compute_add_to_class(self):
         """Compute if the 'Add to Class' button should be shown."""
         for record in self:
             record.add_to_class = bool(self.env.context.get('add_to_class'))
 
+    add_to_class = fields.Boolean(
+        string='Add to Class',
+        compute='_compute_add_to_class',
+        help='Show the "Add to Class" button when selecting students for a class.'
+    )
 
     def action_add_to_class(self):
         """Add this student to the active class."""

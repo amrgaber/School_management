@@ -26,7 +26,7 @@
                     <field name="company_id" optional="show" column_invisible="True"/>
                     <button name="action_add_to_class" type="object" icon="fa-plus"
                             invisible="add_to_class == False"/>
-                </list>
+                    </list>
             </field>
         </record>
 
@@ -42,9 +42,7 @@
                         <button name="some_teacher_action" type="object"
                                 string="Special Teacher Action"
                                 invisible="not is_class_teacher"/>
-                                <field name="state"/>
-
-                        <field name="state" widget="statusbar" statusbar_visible="draft,enrolled,graduated,dropped"/>
+                                <field name="state" widget="statusbar" statusbar_visible="draft,enrolled,graduated,dropped"/>
                     </header>
                     <sheet>
                         <div class="oe_button_box" name="button_box">

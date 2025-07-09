@@ -73,6 +73,7 @@ class EducationClass(models.Model):
             'domain': [('student_id.class_id', '=', self.id)],
             'context': {'default_class_id': self.id, 'search_default_active': 1}
         }
+
     def action_add_student(self):
         """Open the student selection window to add students to this class."""
         self.ensure_one()
@@ -80,7 +81,7 @@ class EducationClass(models.Model):
             'name': 'Select Students',
             'type': 'ir.actions.act_window',
             'res_model': 'education.student',
-            'view_mode': 'list,form',
+            'view_mode': 'kanban,list,form',
             'target': 'current',
             'context': {'add_to_class': True, 'active_class_id': self.id},
         }
