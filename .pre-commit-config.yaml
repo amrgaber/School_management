@@ -43,16 +43,16 @@ repos:
         args: ["--fix"]
 
   # Pylint with Odoo plugin (disabled for now - has many warnings to fix)
-  # - repo: https://github.com/OCA/pylint-odoo
-  #   rev: v9.3.12
-  #   hooks:
-  #     - id: pylint_odoo
-  #       args: ["--rcfile=.pylintrc", "--load-plugins=pylint_odoo"]
-
   - repo: https://github.com/OCA/pylint-odoo
-    rev: v9.3.12 # may be a tag or commit hash
+    rev: v9.3.12
     hooks:
-      # Add to your .pylintrc file:
-      # [MASTER]
-      # load-plugins=pylint_odoo
       - id: pylint_odoo
+        args: ["--rcfile=.pylintrc", "--load-plugins=pylint_odoo"]
+
+  # - repo: https://github.com/OCA/pylint-odoo
+  #   rev: v9.3.12 # may be a tag or commit hash
+  #   hooks:
+  #     # Add to your .pylintrc file:
+  #     # [MASTER]
+  #     # load-plugins=pylint_odoo
+  #     - id: pylint_odoo
