@@ -48,3 +48,11 @@ repos:
   #   hooks:
   #     - id: pylint_odoo
   #       args: ["--rcfile=.pylintrc", "--load-plugins=pylint_odoo"]
+
+  - repo: https://github.com/OCA/pylint-odoo
+    rev: v9.3.12 # may be a tag or commit hash
+    hooks:
+      # Add to your .pylintrc file:
+      # [MASTER]
+      # load-plugins=pylint_odoo
+      - id: pylint_odoo
