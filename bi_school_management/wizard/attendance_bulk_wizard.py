@@ -24,10 +24,10 @@ class EducationAttendanceBulkWizard(models.TransientModel):
         for line in self.attendance_line_ids:
             self.env["education.attendance"].create(
                 {
-                    "student_id": line.student_id.id,
+                    "student_id": line.student_id.id,  # pylint: disable=no-member
                     "class_id": self.class_id.id,
                     "date": self.date,
-                    "state": line.state,
+                    "state": line.state,  # pylint: disable=no-member
                     "teacher_id": self.class_id.teacher_id.id,
                 }
             )

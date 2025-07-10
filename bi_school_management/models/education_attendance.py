@@ -19,7 +19,7 @@ class EducationAttendance(models.Model):
         "education.enrollment", string="Enrollment", tracking=True
     )
     date = fields.Date(
-        string="Attendance Date",
+        string="Attendance Dates",
         default=fields.Date.context_today,
         required=True,
         tracking=True,
