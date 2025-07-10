@@ -3,31 +3,7 @@
     "version": "18.0.1.0.0",
     "category": "Education",
     "summary": "Education Management with Advanced Context Usage Demonstrations",
-    "description": """
-Education Context Demo Module
-=============================
-
-This module demonstrates advanced context usage patterns in Odoo 18 through a comprehensive education management system.
-
-Key Context Usage Patterns Demonstrated:
-* Default Values via Context in forms and wizards
-* Dynamic Domains via Context for filtering records
-* Multi-Step Wizards with Context flow between steps
-* Context in Smart Buttons and action methods
-* Context for Security and role-based access control
-
-Features:
-* School and Department Management
-* Student Registration and Management
-* Course and Class Management
-* Enrollment Workflow with Financial Integration
-* Attendance Tracking with Bulk Operations
-* Academic Year Management
-* Integration with HR, Accounting, and Inventory modules
-
-This module serves as a practical tutorial and reference for developers learning advanced context usage in Odoo 18.
-    """,
-    "author": "AmrGaber",
+    "author": "Amr Gaber",
     "website": "https://www.linkedin.com/in/amrgabr/",
     "depends": [
         "base",
@@ -44,7 +20,6 @@ This module serves as a practical tutorial and reference for developers learning
         "security/ir.model.access.csv",
         # Data
         "data/education_sequence.xml",
-        "data/education_data.xml",
         # Views
         "views/education_school_views.xml",
         "views/education_academic_year_views.xml",
