@@ -1,4 +1,4 @@
 Changelog
 =========
 
-- Initial version: Basic school management features added.
+- Initial version: Basic BI school management features added.
