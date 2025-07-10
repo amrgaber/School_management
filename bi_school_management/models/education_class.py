@@ -120,3 +120,19 @@ class EducationClass(models.Model):
             "res_id": new_student.id,
             "target": "current",
         }
+
+    @api.returns("education.student")
+    def get_students(self):
+        return self.student_ids
+
+    @api.readonly
+    def get_student_statistics(self):
+        """Return statistics about students in this class (readonly)."""
+        stats = {
+            "total": len(self.student_ids),
+            "enrolled": len(self.student_ids.filtered(lambda s: s.state == "enrolled")),
+            "graduated": len(
+                self.student_ids.filtered(lambda s: s.state == "graduated")
+            ),
+        }
+        return stats

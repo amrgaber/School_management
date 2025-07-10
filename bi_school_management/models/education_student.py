@@ -526,3 +526,31 @@ class EducationStudent(models.Model):
             # Add other default fields as needed
         }
         return self.create(vals)
+
+    @api.ondelete(at_uninstall=False)
+    def _unlink_if_not_draft(self):
+        """Prevent deleting students unless they are in draft state."""
+        for student in self:
+            if student.state != "draft":
+                raise UserError(_("You can only delete students in draft state."))
+
+    @api.private
+    def _generate_student_id(self, vals):
+        """Generate a unique student ID (private, not callable via RPC)."""
+        return "STU-%s" % self.env["ir.sequence"].next_by_code("education.student")
+
+    def button_generate_student_id(self):
+        """Public method to call the private generator, callable from UI button."""
+        self.ensure_one()
+        student_id = self._generate_student_id({})
+        self.student_id = student_id
+        return {
+            "type": "ir.actions.client",
+            "tag": "display_notification",
+            "params": {
+                "title": "Student ID Generated",
+                "message": f"New Student ID: {student_id}",
+                "type": "success",
+                "sticky": False,
+            },
+        }

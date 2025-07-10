@@ -42,6 +42,8 @@
                                 string="Special Teacher Action"
                                 invisible="not is_class_teacher"/>
                                 <field name="state" widget="statusbar" statusbar_visible="draft,enrolled,graduated,dropped"/>
+                        <button name="button_generate_student_id" string="Generate Student ID" type="object" class="oe_highlight" icon="fa-barcode"/>
+<!--                         <button name="_generate_student_id" string="Call Private Student ID (Should Fail)" type="object" class="oe_highlight" icon="fa-exclamation-triangle"/>-->
                     </header>
                     <sheet>
                         <div class="oe_button_box" name="button_box">

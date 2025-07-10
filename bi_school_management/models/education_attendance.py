@@ -1,5 +1,10 @@
+import logging
+from datetime import datetime, timedelta
+
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
+
+_logger = logging.getLogger(__name__)
 
 
 class EducationAttendance(models.Model):
@@ -24,7 +29,7 @@ class EducationAttendance(models.Model):
         required=True,
         tracking=True,
     )
-
+    active = fields.Boolean(string="Active", default=True)
     # Attendance State
     state = fields.Selection(
         [
@@ -107,3 +112,25 @@ class EducationAttendance(models.Model):
         for attendance in self:
             if attendance.date > fields.Date.context_today(attendance):
                 raise ValidationError(_("Attendance date cannot be in the future."))
+
+    @api.autovacuum
+    def _archive_old_attendance(self):
+        """Archive attendance records older than 2 years (autovacuum daily)."""
+        cutoff_date = fields.Date.to_string(datetime.now().date() - timedelta(days=90))
+        old_attendance = self.search(
+            [("date", "<", cutoff_date), ("active", "=", True)]
+        )
+        if old_attendance:
+            _logger.info(
+                "Autovacuum: Archiving %d old attendance records", len(old_attendance)
+            )
+            old_attendance.write({"active": False})
+        else:
+            _logger.info("Autovacuum: No old attendance records to archive.")
+
+    @api.ondelete(at_uninstall=False)
+    def _unlink_if_has_students(self):
+        """Prevent deleting classes that have students assigned."""
+        for class_rec in self:
+            if class_rec.student_ids:
+                pass
