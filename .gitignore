@@ -27,3 +27,6 @@ pyproject.toml
 # OS specific files
 .DS_Store
 Thumbs.db
+
+# Scripts folder
+scripts/
